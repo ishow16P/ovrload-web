@@ -10,7 +10,7 @@ ENV VITE_API_URL=$VITE_API_URL
 RUN npm run build
 
 FROM nginxinc/nginx-unprivileged:stable-alpine
-# PORT is injected by Railway; API_UPSTREAM e.g. http://ovrload-api.railway.internal:4000
+# PORT is injected by Railway; API_UPSTREAM e.g. http://ovrload-api.railway.internal:3000
 ENV PORT=8080 \
     API_UPSTREAM=""
 COPY nginx/default.conf.template /etc/nginx/templates/default.conf.template

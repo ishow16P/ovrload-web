@@ -21,14 +21,14 @@ The image builds the app with `VITE_API_URL=/api` and serves it with nginx (non-
 
    | Variable | Value |
    |---|---|
-   | `API_UPSTREAM` | `http://${{ovrload-api.RAILWAY_PRIVATE_DOMAIN}}:4000` (use your API service name) |
+   | `API_UPSTREAM` | `http://${{ovrload-api.RAILWAY_PRIVATE_DOMAIN}}:3000` (use your API service name; port = API `PORT`) |
 
    Railway injects `PORT`. The container refuses to start without `API_UPSTREAM`.
 4. **Settings → Networking → Generate Domain** — this is the app URL.
 
 ```bash
 docker build -t ovrload-web .
-docker run --rm -p 8080:8080 -e API_UPSTREAM=http://host.docker.internal:4000 ovrload-web
+docker run --rm -p 8080:8080 -e API_UPSTREAM=http://host.docker.internal:3000 ovrload-web   # API image; use :4000 for npm run dev
 ```
 
 `nginx/15-resolver.sh` writes a `resolver` from the container's DNS so the API hostname is re-resolved

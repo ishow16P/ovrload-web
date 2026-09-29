@@ -4,7 +4,7 @@
 set -e
 
 if [ -z "$API_UPSTREAM" ]; then
-  echo "API_UPSTREAM is not set (e.g. http://ovrload-api.railway.internal:4000)" >&2
+  echo "API_UPSTREAM is not set (e.g. http://ovrload-api.railway.internal:3000)" >&2
   exit 1
 fi
 
