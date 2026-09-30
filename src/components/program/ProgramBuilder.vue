@@ -38,6 +38,13 @@ function toggle(e: Exercise) {
     : [...selected.value, { exercise: e, targetSets: 3, targetWeight: 0, targetReps: 0 }]
 }
 
+// Enter in a text field would implicitly submit the form — only the Save button should save
+function blurOnEnter(e: KeyboardEvent) {
+  if (!(e.target instanceof HTMLInputElement)) return
+  e.preventDefault()
+  e.target.blur()
+}
+
 function submit() {
   if (!canSave.value) return
   emit('save', {
@@ -49,7 +56,7 @@ function submit() {
 </script>
 
 <template>
-  <form class="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:pb-0" @submit.prevent="submit">
+  <form class="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:pb-0" @submit.prevent="submit" @keydown.enter="blurOnEnter">
     <!-- Library: inline on desktop, Sheet on mobile/tablet -->
     <RedHeaderCard title="Exercise library" class="hidden lg:flex lg:max-h-[calc(100dvh-10rem)] lg:sticky lg:top-20">
       <ExerciseSelector class="h-full" :exercises="exercises" :selected-ids="selectedIds" @toggle="toggle" />
